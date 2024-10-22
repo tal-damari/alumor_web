@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const connection = 'mongodb+srv://taldamari643:tal123123@alumorcluster.qy73y.mongodb.net/?retryWrites=true&w=majority&appName=alumorCluster'
+const connection = 'mongodb+srv://taldamari643:tal123123@alumorcluster.qy73y.mongodb.net/db_collection?retryWrites=true&w=majority&appName=alumorCluster'
 
 const connectToDatabase = () => {
     mongoose.connect(connection)

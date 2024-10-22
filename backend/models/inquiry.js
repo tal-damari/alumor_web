@@ -16,7 +16,7 @@ const userInquirySchema = new mongoose.Schema({
         trim: true
     },
     phone: {
-        type: Number,
+        type: String,
         required: true,
         minlength: 9,
         maxlength: 12,
@@ -26,7 +26,7 @@ const userInquirySchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        minlength: 5,
+        minlength: 9,
         maxlength: 50,
         trim:true,
         lowercase: true,
