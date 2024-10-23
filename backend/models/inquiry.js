@@ -25,7 +25,6 @@ const userInquirySchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true,
         minlength: 9,
         maxlength: 50,
         trim:true,
