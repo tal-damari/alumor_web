@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
 
-const connection = 'mongodb+srv://taldamari643:tal123123@alumorcluster.qy73y.mongodb.net/db_collection?retryWrites=true&w=majority&appName=alumorCluster'
+dotenv.config();
+
+const connection = process.env.MONGODB_URI;
 
 const connectToDatabase = () => {
     mongoose.connect(connection)
