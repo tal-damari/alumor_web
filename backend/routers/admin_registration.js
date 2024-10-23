@@ -34,7 +34,7 @@ router.get('/dashboard', [verifyToken], async (req, res) => {
 router.get('/dashboard/:id', [verifyToken], async (req, res) => {
     const id = req.params.id;
     try{
-        const singleInquiry = await UserInquiry.find({
+        const inquiryById = await UserInquiry.find({
             $or:[
                 {email: id},
                 {phone: id},
@@ -42,12 +42,12 @@ router.get('/dashboard/:id', [verifyToken], async (req, res) => {
             ]
         });
 
-        if(!singleInquiry){
+        if(!inquiryById){
             return res.status(404).send({message:"No inquiry found by this parameter given."});
         }
 
-        JSON.stringify(singleInquiry);
-        res.status(200).send({singleInquiry});
+        JSON.stringify(inquiryById);
+        res.status(200).send({inquiryById});
 
     }catch (e) {
         res.status(500).send({message: e});
