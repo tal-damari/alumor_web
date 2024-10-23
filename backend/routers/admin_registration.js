@@ -1,6 +1,7 @@
 import {Router} from 'express';
 import dotenv from 'dotenv';
 import {generateToken, verifyToken} from "../utils/token.js";
+import UserInquiry from '../models/inquiry.js';
 
 dotenv.config();
 
@@ -19,9 +20,39 @@ router.post('/login', async (req, res) => {
     }
 })
 
-router.get('/dashboard', [verifyToken], (req, res) => {
-    res.send({ message: 'Welcome to the admin dashboard!' });
+router.get('/dashboard', [verifyToken], async (req, res) => {
+    try{
+        const inquiries = await UserInquiry.find({});
+        JSON.stringify(inquiries);
+        res.status(200).send(inquiries);
+    }catch (e) {
+        res.status(500).send({message: e});
+    }
 });
+
+//find by a given some id - username/ phone/ email
+router.get('/dashboard/:id', [verifyToken], async (req, res) => {
+    const id = req.params.id;
+    try{
+        const singleInquiry = await UserInquiry.findOne({
+            $or:[
+                {email: id},
+                {phone: id},
+                {first_name: id}
+            ]
+        });
+
+        if(!singleInquiry){
+            return res.status(404).send({message:"No inquiry found by this parameter given."});
+        }
+
+        JSON.stringify(singleInquiry);
+        res.status(200).send({singleInquiry});
+
+    }catch (e) {
+        res.status(500).send({message: e});
+    }
+})
 
 
 export default router;
