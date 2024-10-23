@@ -34,7 +34,7 @@ router.get('/dashboard', [verifyToken], async (req, res) => {
 router.get('/dashboard/:id', [verifyToken], async (req, res) => {
     const id = req.params.id;
     try{
-        const singleInquiry = await UserInquiry.findOne({
+        const singleInquiry = await UserInquiry.find({
             $or:[
                 {email: id},
                 {phone: id},
